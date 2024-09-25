@@ -8,6 +8,7 @@ function App() {
   const [allCountries, setAllCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState({});
   const [selectedCity, setSelectedCity] = useState({});
+  
   useEffect(() => {
     setAllCountries(
       Country.getAllCountries().map((country) => ({
@@ -38,7 +39,19 @@ function App() {
         <Select options={allCountries} value={selectedCountry} onChange={handleSelectedCounty} />
 
 
-        <Select />
+        <Select 
+        options={City.getCitiesOfCountry(selectedCountry?.value?.isoCode).map(
+          (city) => ({
+            value: {
+              latitude: city.latitude,
+              longitude: city.longitude,
+              name: city.name,
+            },
+            label: city.name,
+          })
+        )}
+        value={selectedCity}
+        onChange={handleSeclectedCity}/>
 
         <button className="bg-green-400 w-full py-3 text-white text-sm font-bold hover:scale-105 transition-all duration-200 ease-in-out">Get Weather</button>
        </div>
