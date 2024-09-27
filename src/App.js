@@ -2,6 +2,12 @@ import { City, Country } from "country-state-city";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { Card, Metric, Text } from "@tremor/react";
+import AreaChartCard from "./components/AreaChartCard";
+import LineChartCard from "./components/LineChartCard";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import NightLightRoundIcon from "@mui/icons-material/NightLightRound";
+import moment from "moment/moment";
+
 
 function Sidebar() {
   const [allCountries, setAllCountries] = useState([]);
@@ -90,6 +96,21 @@ function Sidebar() {
         </div>
 
         {/* Day or Night */}
+        <div className="flex items-center space-x-5 text-white">
+          <p>
+            <WbSunnyIcon />
+            {moment(
+              new Date(weatherDetails?.daily?.sunrise?.[0].getTime()).format("LT")
+            )}
+          </p>
+          <p>
+            <NightLightRoundIcon />
+            {moment(
+              new Date(weatherDetails?.daily?.sunset?.[0].getTime()).format("LT")
+            )}
+          </p>
+
+        </div>
         
       </div>
 
@@ -129,6 +150,11 @@ function Sidebar() {
         </div>
 
         {/* Charts */}
+
+        <div className="mt-5">
+          <AreaChartCard weatherDetails={weatherDetails}/>
+          <LineChartCard weatherDetails={weatherDetails}/>
+        </div>
         
       </div>
     </div>
