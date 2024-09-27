@@ -32,21 +32,13 @@ function Sidebar() {
     setSelectedCity(option);
   };
 
-  const getWeatherDetails = () => {
-    // Implement the logic to fetch weather details based on selectedCity
-    // For example, you can use an API to fetch the weather details
-    // and then update the weatherDetails state with the fetched data.
-    if (selectedCity) {
-      // Example API call (replace with actual API call)
-      fetch(`https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${selectedCity.value.latitude},${selectedCity.value.longitude}`)
-        .then(response => response.json())
-        .then(data => {
-          setWeatherDetails(data);
-        })
-        .catch(error => {
-          console.error("Error fetching weather details:", error);
-        });
-    }
+  const getWeatherDetails = async (e) => {
+    e.preventDefault();
+
+    const fetchWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${selectedCity.value.latitude}&longitude=${selectedCity.value.longitude}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,wind_speed_180m,temperature_180m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,wind_speed_10m_max`);
+
+    const data = await fetchWeather.json();
+    setWeatherDetails(data);
   };
 
   return (
@@ -111,7 +103,7 @@ function Sidebar() {
           >
             <Text className="!font-semibold !text-xl">Max Temperature</Text>
             <Metric className="!text-black !font-bold">
-              {weatherDetails?.current?.temp_c} &#x2103;
+              {weatherDetails?.daily?.apparent_temperature_max?.[0]} &#x2103;
             </Metric>
           </Card>
           <Card
@@ -121,7 +113,7 @@ function Sidebar() {
           >
             <Text className="!font-semibold !text-xl">Min Temperature</Text>
             <Metric className="!text-black !font-bold">
-              {weatherDetails?.current?.temp_c} &#x2103;
+              {weatherDetails?.daily?.apparent_temperature_min?.[0]} &#x2103;
             </Metric>
           </Card>
           <Card
@@ -131,7 +123,7 @@ function Sidebar() {
           >
             <Text className="!font-semibold !text-xl">Wind Direction</Text>
             <Metric className="!text-black !font-bold">
-              {weatherDetails?.current?.wind_dir} &#176;
+              {weatherDetails?.daily?.winddirection_10m_dominant?.[0]} &#176;
             </Metric>
           </Card>
         </div>
