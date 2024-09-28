@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TNishan10/weather-api-Ts/static/css/main.e10dfa70.css",
+    "main.js": "/TNishan10/weather-api-Ts/static/js/main.57b5e05c.js",
+    "static/js/453.544ce3a0.chunk.js": "/TNishan10/weather-api-Ts/static/js/453.544ce3a0.chunk.js",
+    "index.html": "/TNishan10/weather-api-Ts/index.html",
+    "main.e10dfa70.css.map": "/TNishan10/weather-api-Ts/static/css/main.e10dfa70.css.map",
+    "main.57b5e05c.js.map": "/TNishan10/weather-api-Ts/static/js/main.57b5e05c.js.map",
+    "453.544ce3a0.chunk.js.map": "/TNishan10/weather-api-Ts/static/js/453.544ce3a0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e10dfa70.css",
+    "static/js/main.57b5e05c.js"
+  ]
+}
